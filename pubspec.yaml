@@ -1,0 +1,24 @@
+name: countries
+description: Countries, codes, flags and several way of picking them at your
+  service...one widget away...
+version: 0.0.1
+author: Shrjamal <me@shrjamal.com>
+homepage: https://github.com/appsah/countries
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^1.11.5
+  lint: ^1.5.2
+
+flutter:
+  assets:
+    - assets/
