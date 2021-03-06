@@ -1,7 +1,7 @@
 library countries;
 
-export 'data/countries.dart';
-export 'models/country.dart';
-export 'widgets/dialog.dart';
-export 'widgets/dropdown.dart';
-export 'widgets/flag.dart';
+export 'src/data/countries.dart';
+export 'src/models/country.dart';
+export 'src/widgets/dialog.dart';
+export 'src/widgets/dropdown.dart';
+export 'src/widgets/flag.dart';
