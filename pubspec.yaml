@@ -2,7 +2,6 @@ name: countries
 description: Countries, codes, flags and several way of picking them at your
   service...one widget away...
 version: 0.0.1
-author: Shrjamal <me@shrjamal.com>
 homepage: https://github.com/appsah/countries
 
 environment:
