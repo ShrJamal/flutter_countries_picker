@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../countries.dart';
+import '../../../countries.dart';
 
 class CountriesSearchWidget extends StatelessWidget {
   final List<Country> allCountries;

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../core/typedefs.dart';
 import '../data/countries.dart';
 import '../models/country.dart';
-import 'flag.dart';
+import 'widgets/flag.dart';
 
 ///Provides a customizable [DropdownButton] for all countries
 class CountryPickerDropdown extends StatefulWidget {

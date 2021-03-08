@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../countries.dart';
+import '../../../countries.dart';
+import 'flag.dart';
 
 class CountryItemWidget extends StatelessWidget {
   final Country country;

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../core/typedefs.dart';
 import '../data/countries.dart';
 import '../models/country.dart';
-import 'country_item.dart';
-import 'search.dart';
+import 'widgets/country_item.dart';
+import 'widgets/search.dart';
 
 ///Provides a customizable [Dialog] which displays all countries
 /// with optional search feature

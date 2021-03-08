@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../countries.dart';
 import '../core/typedefs.dart';
-import 'country_item.dart';
+import 'widgets/country_item.dart';
+import 'widgets/search.dart';
 
 void showCountriesBottomSheet(
   BuildContext context, {
