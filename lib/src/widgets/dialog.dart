@@ -4,31 +4,15 @@ import 'package:flutter/material.dart';
 import '../core/typedefs.dart';
 import '../data/countries.dart';
 import '../models/country.dart';
+import 'country_item.dart';
+import 'search.dart';
 
 ///Provides a customizable [Dialog] which displays all countries
 /// with optional search feature
 
 class CountryPickerDialog extends StatefulWidget {
   /// Callback that is called with selected Country
-  final ValueChanged<Country>? onValuePicked;
-
-  /// The (optional) title of the dialog is displayed in a large font at the top
-  /// of the dialog.
-  ///
-  /// Typically a [Text] widget.
-  final Widget? title;
-
-  /// Padding around the title.
-  ///
-  /// If there is no title, no padding will be provided. Otherwise, this padding
-  /// is used.
-  ///
-  /// This property defaults to providing 12 pixels on the top,
-  /// 16 pixels on bottom of the title. If the [content] is not null, then no bottom padding is
-  /// provided (but see [contentPadding]). If it _is_ null, then an extra 20
-  /// pixels of bottom padding is added to separate the [title] from the
-  /// [actions].
-  final EdgeInsetsGeometry? titlePadding;
+  final ValueChanged<Country> onValuePicked;
 
   /// The semantic label of the dialog used by accessibility frameworks to
   /// announce screen transitions when the dialog is opened and closed.
@@ -56,15 +40,7 @@ class CountryPickerDialog extends StatefulWidget {
   ///Widget to build list view item inside dialog
   final ItemBuilder? itemBuilder;
 
-  /// Determines if search [TextField] is shown or not
-  /// Defaults to false
-  final bool isSearchable;
-
-  /// The optional [decoration] of search [TextField]
-  final InputDecoration? searchInputDecoration;
-
-  ///The optional [cursorColor] of search [TextField]
-  final Color? searchCursorColor;
+  final SearchWidgetStyle? searchWidgetStyle;
 
   ///The search empty view is displayed if nothing returns from search result
   final Widget? searchEmptyView;
@@ -73,34 +49,26 @@ class CountryPickerDialog extends StatefulWidget {
   ///Set popOnPick to false to prevent this behaviour.
   final bool popOnPick;
 
-  ///Filters the country list for search
-  final SearchFilter? searchFilter;
-
   const CountryPickerDialog({
     Key? key,
-    this.onValuePicked,
-    this.title,
-    this.titlePadding,
+    required this.onValuePicked,
     this.semanticLabel = '',
     this.itemFilter,
     this.sortComparator,
     this.priorityList = const [],
     this.itemBuilder,
-    this.isSearchable = false,
     this.popOnPick = true,
-    this.searchInputDecoration,
-    this.searchCursorColor,
+    this.searchWidgetStyle,
     this.searchEmptyView,
-    this.searchFilter,
   }) : super(key: key);
 
   @override
-  SingleChoiceDialogState createState() {
-    return SingleChoiceDialogState();
+  _CountryPickerDialog createState() {
+    return _CountryPickerDialog();
   }
 }
 
-class SingleChoiceDialogState extends State<CountryPickerDialog> {
+class _CountryPickerDialog extends State<CountryPickerDialog> {
   late List<Country> _allCountries;
 
   late List<Country> _filteredCountries;
@@ -109,7 +77,7 @@ class SingleChoiceDialogState extends State<CountryPickerDialog> {
   void initState() {
     _allCountries = [
       for (final v in CountriesRepo.countryList)
-        if (widget.itemFilter?.call(v) == true) v
+        if (widget.itemFilter?.call(v) ?? true) v
     ];
 
     if (widget.sortComparator != null) {
@@ -131,32 +99,10 @@ class SingleChoiceDialogState extends State<CountryPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Column(
-        children: <Widget>[
-          Padding(
-            padding: widget.titlePadding ?? EdgeInsets.all(8),
-            child: widget.title,
-          ),
-          if (widget.isSearchable)
-            TextField(
-              cursorColor: widget.searchCursorColor,
-              decoration: widget.searchInputDecoration ??
-                  InputDecoration(hintText: 'Search'),
-              onChanged: (v) {
-                bool searchFilter(Country c) =>
-                    widget.searchFilter?.call(c, v) ??
-                    c.name.toLowerCase().startsWith(v.toLowerCase()) ||
-                        c.phoneCode.startsWith(v.toLowerCase()) ||
-                        c.isoCode.toLowerCase().startsWith(v.toLowerCase()) ||
-                        c.iso3Code.toLowerCase().startsWith(v.toLowerCase());
-                _filteredCountries = [
-                  for (final c in _allCountries)
-                    if (searchFilter(c)) c
-                ];
-                setState(() {});
-              },
-            ),
-        ],
+      title: CountriesSearchWidget(
+        allCountries: _allCountries,
+        onChange: (v) => setState(() => _filteredCountries = v),
+        style: widget.searchWidgetStyle,
       ),
       semanticLabel: widget.semanticLabel,
       children: [
@@ -166,12 +112,14 @@ class SingleChoiceDialogState extends State<CountryPickerDialog> {
               for (final c in _filteredCountries)
                 SimpleDialogOption(
                   onPressed: () {
-                    widget.onValuePicked?.call(c);
-                    if (widget.popOnPick) {
-                      Navigator.pop(context);
-                    }
+                    widget.onValuePicked(c);
+                    if (widget.popOnPick) Navigator.pop(context);
                   },
-                  child: widget.itemBuilder?.call(c) ?? Text(c.name),
+                  child: widget.itemBuilder?.call(c) ??
+                      CountryItemWidget(
+                        c,
+                        onTap: widget.onValuePicked,
+                      ),
                 )
             ],
           )
