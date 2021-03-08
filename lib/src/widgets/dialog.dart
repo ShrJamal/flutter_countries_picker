@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../core/typedefs.dart';
 import '../data/countries.dart';
 import '../models/country.dart';
-import 'alert_dialog.dart';
 
 ///Provides a customizable [Dialog] which displays all countries
 /// with optional search feature
@@ -30,10 +29,6 @@ class CountryPickerDialog extends StatefulWidget {
   /// pixels of bottom padding is added to separate the [title] from the
   /// [actions].
   final EdgeInsetsGeometry? titlePadding;
-
-  /// Padding around the content.
-
-  final EdgeInsetsGeometry? contentPadding;
 
   /// The semantic label of the dialog used by accessibility frameworks to
   /// announce screen transitions when the dialog is opened and closed.
@@ -61,16 +56,6 @@ class CountryPickerDialog extends StatefulWidget {
   ///Widget to build list view item inside dialog
   final ItemBuilder? itemBuilder;
 
-  /// The (optional) horizontal separator used between title, content and
-  /// actions.
-  ///
-  /// If this divider is not provided a [Divider] is used with [height]
-  /// property is set to 0.0
-  final Widget? divider;
-
-  /// The [divider] is not displayed if set to false. Default is set to false.
-  final bool isDividerEnabled;
-
   /// Determines if search [TextField] is shown or not
   /// Defaults to false
   final bool isSearchable;
@@ -96,16 +81,11 @@ class CountryPickerDialog extends StatefulWidget {
     this.onValuePicked,
     this.title,
     this.titlePadding,
-    this.contentPadding = const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 16.0),
     this.semanticLabel = '',
     this.itemFilter,
     this.sortComparator,
     this.priorityList = const [],
     this.itemBuilder,
-    this.isDividerEnabled = false,
-    this.divider = const Divider(
-      height: 0.0,
-    ),
     this.isSearchable = false,
     this.popOnPick = true,
     this.searchInputDecoration,
@@ -150,7 +130,7 @@ class SingleChoiceDialogState extends State<CountryPickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomAlertDialog(
+    return SimpleDialog(
       title: Column(
         children: <Widget>[
           Padding(
@@ -178,30 +158,26 @@ class SingleChoiceDialogState extends State<CountryPickerDialog> {
             ),
         ],
       ),
-      contentPadding: widget.contentPadding,
       semanticLabel: widget.semanticLabel,
-      content: _filteredCountries.isNotEmpty
-          ? ListView(
-              shrinkWrap: true,
-              children: [
-                for (final c in _filteredCountries)
-                  SimpleDialogOption(
-                    onPressed: () {
-                      widget.onValuePicked?.call(c);
-                      if (widget.popOnPick) {
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: widget.itemBuilder?.call(c) ?? Text(c.name),
-                  )
-              ],
-            )
-          : widget.searchEmptyView ??
-              Center(
-                child: Text('No country found.'),
-              ),
-      isDividerEnabled: widget.isDividerEnabled,
-      divider: widget.divider,
+      children: [
+        if (_filteredCountries.isNotEmpty)
+          Column(
+            children: [
+              for (final c in _filteredCountries)
+                SimpleDialogOption(
+                  onPressed: () {
+                    widget.onValuePicked?.call(c);
+                    if (widget.popOnPick) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: widget.itemBuilder?.call(c) ?? Text(c.name),
+                )
+            ],
+          )
+        else
+          widget.searchEmptyView ?? Center(child: Text('No country found.')),
+      ],
     );
   }
 }
