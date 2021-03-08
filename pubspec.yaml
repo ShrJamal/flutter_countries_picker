@@ -1,7 +1,6 @@
 name: countries
-description: Countries, codes, flags and several way of picking them at your
-  service...one widget away...
-version: 0.0.2
+description: pick countries with dialog, bottom sheet or dropdown, access to countries code and flags
+version: 0.0.3
 homepage: https://github.com/appsah/countries
 
 environment:
