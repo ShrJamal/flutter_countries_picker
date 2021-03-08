@@ -3,10 +3,23 @@ import 'package:flutter/material.dart';
 import '../core/typedefs.dart';
 import '../data/countries.dart';
 import '../models/country.dart';
-import 'widgets/flag.dart';
+import 'widgets/country_item.dart';
 
 ///Provides a customizable [DropdownButton] for all countries
 class CountryPickerDropdown extends StatefulWidget {
+  ///It should be one of the ISO ALPHA-2 Code that is provided
+  ///in countryList map of countries.dart file.
+  final String? initialValue;
+
+  ///This function will be called whenever a Country item is selected.
+  final ValueChanged<Country> onValuePicked;
+
+  ///This function will be called to build the child of DropdownMenuItem
+  ///If it is not provided, default one will be used which displays
+  ///flag image, isoCode and phoneCode in a row.
+  ///Check _buildDefaultMenuItem method for details.
+  final Widget Function(Country)? itemBuilder;
+
   /// Filters the available country list
   final ItemFilter? itemFilter;
 
@@ -15,19 +28,6 @@ class CountryPickerDropdown extends StatefulWidget {
 
   /// List of countries that are placed on top
   final List<Country> priorityList;
-
-  ///This function will be called to build the child of DropdownMenuItem
-  ///If it is not provided, default one will be used which displays
-  ///flag image, isoCode and phoneCode in a row.
-  ///Check _buildDefaultMenuItem method for details.
-  final Widget Function(Country)? itemBuilder;
-
-  ///It should be one of the ISO ALPHA-2 Code that is provided
-  ///in countryList map of countries.dart file.
-  final String? initialValue;
-
-  ///This function will be called whenever a Country item is selected.
-  final ValueChanged<Country>? onValuePicked;
 
   /// Boolean property to enabled/disable expanded property of DropdownButton
   final bool isExpanded;
@@ -70,12 +70,12 @@ class CountryPickerDropdown extends StatefulWidget {
 
   const CountryPickerDropdown({
     Key? key,
+    this.initialValue,
+    required this.onValuePicked,
     this.itemFilter,
     this.sortComparator,
     this.priorityList = const [],
     this.itemBuilder,
-    this.initialValue,
-    this.onValuePicked,
     this.isExpanded = false,
     this.itemHeight = kMinInteractiveDimension,
     this.isDense = false,
@@ -149,21 +149,17 @@ class _CountryPickerDropdownState extends State<CountryPickerDropdown> {
       isExpanded: widget.isExpanded,
       onChanged: (value) {
         if (value == null) return;
-        _selectedCountry = value;
-        widget.onValuePicked?.call(value);
-        setState(() {});
+        widget.onValuePicked(value);
+        setState(() => _selectedCountry = value);
       },
       items: [
         for (final c in _countries)
           DropdownMenuItem<Country>(
             value: c,
             child: widget.itemBuilder?.call(c) ??
-                Row(
-                  children: <Widget>[
-                    CountryFlagWidget(c),
-                    SizedBox(width: 8.0),
-                    Text("(${c.isoCode}) +${c.phoneCode}"),
-                  ],
+                CountryItemWidget(
+                  c,
+                  onTap: widget.onValuePicked,
                 ),
           ),
       ],
