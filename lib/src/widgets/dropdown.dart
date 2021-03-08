@@ -70,6 +70,7 @@ class CountryPickerDropdown extends StatefulWidget {
   final Widget? disabledHint;
 
   const CountryPickerDropdown({
+    Key? key,
     this.itemFilter,
     this.sortComparator,
     this.priorityList = const [],
@@ -78,9 +79,9 @@ class CountryPickerDropdown extends StatefulWidget {
     this.onValuePicked,
     this.isExpanded = false,
     this.itemHeight = kMinInteractiveDimension,
-    this.selectedItemBuilder,
     this.isDense = false,
     this.underline,
+    this.selectedItemBuilder,
     this.dropdownColor,
     this.onTap,
     this.icon,
@@ -89,7 +90,7 @@ class CountryPickerDropdown extends StatefulWidget {
     this.iconSize = 24.0,
     this.hint,
     this.disabledHint,
-  });
+  }) : super(key: key);
 
   @override
   _CountryPickerDropdownState createState() => _CountryPickerDropdownState();
