@@ -6,8 +6,5 @@ import '../models/country.dart';
 /// offered to the user.
 typedef ItemFilter = bool Function(Country country);
 
-///Predicate to be satisfied in order to add country to search list
-typedef SearchFilter = bool Function(Country country, String searchWord);
-
 typedef ItemBuilder = Widget Function(Country country);
 
