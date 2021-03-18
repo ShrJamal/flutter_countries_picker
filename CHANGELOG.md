@@ -7,3 +7,5 @@
 ## [0.0.3] - Add showCountriesBottomSheet
 
 - add `showCountriesBottomSheet` method.
+
+## [0.0.4] - Fix Countries with form of +1-xxx
