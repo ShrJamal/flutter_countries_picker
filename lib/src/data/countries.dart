@@ -37,8 +37,6 @@ mixin CountriesRepo {
     return "assets/${isoCode.toLowerCase()}.png";
   }
 
-
-
   static Country getCountryByPhoneCode(String phoneCode) {
     try {
       return countryList.firstWhere(
@@ -71,7 +69,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "AS",
-      phoneCode: "1-684",
+      phoneCode: "684",
       name: "American Samoa",
       iso3Code: "ASM",
     ),
@@ -89,7 +87,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "AI",
-      phoneCode: "1-264",
+      phoneCode: "264",
       name: "Anguilla",
       iso3Code: "AIA",
     ),
@@ -101,7 +99,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "AG",
-      phoneCode: "1-268",
+      phoneCode: "268",
       name: "Antigua and Barbuda",
       iso3Code: "ATG",
     ),
@@ -143,7 +141,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "BS",
-      phoneCode: "1-242",
+      phoneCode: "242",
       name: "Bahamas",
       iso3Code: "BHS",
     ),
@@ -161,7 +159,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "BB",
-      phoneCode: "1-246",
+      phoneCode: "246",
       name: "Barbados",
       iso3Code: "BRB",
     ),
@@ -191,7 +189,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "BM",
-      phoneCode: "1-441",
+      phoneCode: "441",
       name: "Bermuda",
       iso3Code: "BMU",
     ),
@@ -293,7 +291,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "KY",
-      phoneCode: "1-345",
+      phoneCode: "345",
       name: "Cayman Islands",
       iso3Code: "CYM",
     ),
@@ -419,13 +417,13 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "DM",
-      phoneCode: "1-767",
+      phoneCode: "1",
       name: "Dominica",
       iso3Code: "DMA",
     ),
     Country(
       isoCode: "DO",
-      phoneCode: "1-849",
+      phoneCode: "1",
       name: "Dominican Republic",
       iso3Code: "DOM",
     ),
@@ -575,7 +573,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "GD",
-      phoneCode: "1-473",
+      phoneCode: "473",
       name: "Grenada",
       iso3Code: "GRD",
     ),
@@ -587,7 +585,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "GU",
-      phoneCode: "1-671",
+      phoneCode: "671",
       name: "Guam",
       iso3Code: "GUM",
     ),
@@ -713,7 +711,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "JM",
-      phoneCode: "1-876",
+      phoneCode: "876",
       name: "Jamaica",
       iso3Code: "JAM",
     ),
@@ -953,7 +951,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "MS",
-      phoneCode: "1-664",
+      phoneCode: "664",
       name: "Montserrat",
       iso3Code: "MSR",
     ),
@@ -1055,7 +1053,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "MP",
-      phoneCode: "1-670",
+      phoneCode: "670",
       name: "Northern Mariana Islands",
       iso3Code: "MNP",
     ),
@@ -1139,7 +1137,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "PR",
-      phoneCode: "1-787",
+      phoneCode: "787",
       name: "Puerto Rico",
       iso3Code: "PRI",
     ),
@@ -1187,13 +1185,13 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "KN",
-      phoneCode: "1-869",
+      phoneCode: "869",
       name: "Saint Kitts and Nevis",
       iso3Code: "KNA",
     ),
     Country(
       isoCode: "LC",
-      phoneCode: "1-758",
+      phoneCode: "758",
       name: "Saint Lucia",
       iso3Code: "LCA",
     ),
@@ -1211,7 +1209,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "VC",
-      phoneCode: "1-784",
+      phoneCode: "784",
       name: "Saint Vincent and the Grenadines",
       iso3Code: "VCT",
     ),
@@ -1277,7 +1275,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "SX",
-      phoneCode: "1-721",
+      phoneCode: "721",
       name: "Sint Maarten (Dutch part)",
       iso3Code: "SXM",
     ),
@@ -1427,7 +1425,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "TT",
-      phoneCode: "1-868",
+      phoneCode: "868",
       name: "Trinidad and Tobago",
       iso3Code: "TTO",
     ),
@@ -1451,7 +1449,7 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "TC",
-      phoneCode: "1-649",
+      phoneCode: "649",
       name: "Turks and Caicos Islands",
       iso3Code: "TCA",
     ),
@@ -1529,13 +1527,13 @@ mixin CountriesRepo {
     ),
     Country(
       isoCode: "VG",
-      phoneCode: "1-284",
+      phoneCode: "284",
       name: "Virgin Islands, British",
       iso3Code: "VGB",
     ),
     Country(
       isoCode: "VI",
-      phoneCode: "1-340",
+      phoneCode: "340",
       name: "Virgin Islands, U.S.",
       iso3Code: "VIR",
     ),
