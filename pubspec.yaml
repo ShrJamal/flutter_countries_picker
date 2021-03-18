@@ -1,5 +1,6 @@
 name: countries
-description: pick countries with dialog, bottom sheet or dropdown, access to countries code and flags
+description: pick countries with dialog, bottom sheet or dropdown, access to
+  countries code and flags
 version: 0.0.3
 homepage: https://github.com/appsah/countries
 
@@ -14,8 +15,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.11.5
-  lint: ^1.5.2
+  lint: ^1.5.3
 
 flutter:
   assets:
