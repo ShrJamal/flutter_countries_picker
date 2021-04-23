@@ -1,51 +1,47 @@
 import '../models/country.dart';
 
 mixin CountriesRepo {
-  static Country getCountryByIso3Code(String iso3Code) {
-    try {
-      return countryList.firstWhere(
-        (country) => country.iso3Code.toLowerCase() == iso3Code.toLowerCase(),
-      );
-    } catch (e) {
-      throw Exception(
-        "The initialValue provided is not a supported iso 3 code!",
-      );
-    }
+  static Country getCountryByIso3Code(
+    String iso3Code, [
+    String defaultValue = 'USA',
+  ]) {
+    return countryList.firstWhere(
+      (c) => c.iso3Code.toLowerCase() == iso3Code.toLowerCase(),
+      orElse: () => getCountryByIso3Code(defaultValue),
+    );
   }
 
-  static Country getCountryByIsoCode(String isoCode) {
-    try {
-      return countryList.firstWhere(
-        (country) => country.isoCode.toLowerCase() == isoCode.toLowerCase(),
-      );
-    } catch (e) {
-      throw Exception("The initialValue provided is not a supported iso code!");
-    }
+  static Country getCountryByIsoCode(
+    String isoCode, [
+    String defaultValue = 'US',
+  ]) {
+    return countryList.firstWhere(
+      (c) => c.isoCode.toLowerCase() == isoCode.toLowerCase(),
+      orElse: () => getCountryByIsoCode(defaultValue),
+    );
   }
 
-  static Country getCountryByName(String name) {
-    try {
-      return countryList.firstWhere(
-        (country) => country.name.toLowerCase() == name.toLowerCase(),
-      );
-    } catch (e) {
-      throw Exception("The initialValue provided is not a supported name!");
-    }
+  static Country getCountryByName(
+    String name, [
+    String defaultValue = 'United States',
+  ]) {
+    return countryList.firstWhere(
+      (c) => c.name.toLowerCase() == name.toLowerCase(),
+      orElse: () => getCountryByName(defaultValue),
+    );
   }
 
-  static String getFlagImageAssetPath(String isoCode) {
-    return "assets/${isoCode.toLowerCase()}.png";
-  }
+  static String getFlagImageAssetPath(String isoCode) =>
+      "assets/${isoCode.toLowerCase()}.png";
 
-  static Country getCountryByPhoneCode(String phoneCode) {
-    try {
-      return countryList.firstWhere(
-        (country) => country.phoneCode.toLowerCase() == phoneCode.toLowerCase(),
-      );
-    } catch (e) {
-      throw Exception(
-          "The initialValue provided is not a supported phone code!");
-    }
+  static Country getCountryByPhoneCode(
+    String phoneCode, [
+    String defaultValue = '1',
+  ]) {
+    return countryList.firstWhere(
+      (c) => c.phoneCode.toLowerCase() == phoneCode.toLowerCase(),
+      orElse: () => getCountryByPhoneCode(defaultValue),
+    );
   }
 
   static final countryList = <Country>[

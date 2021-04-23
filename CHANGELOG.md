@@ -9,3 +9,5 @@
 - add `showCountriesBottomSheet` method.
 
 ## [0.0.4] - Fix Countries with form of +1-xxx
+
+## [0.0.5] - Return Default values instead of throwing an error
